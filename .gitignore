@@ -1,0 +1,53 @@
+# Ignore Visual Studio specific files
+.vscode/
+.idea/
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+
+# Ignore build directories
+bin/
+obj/
+
+# Ignore Xamarin/Mac build output
+.build/
+*.apk
+*.ap_  
+*.obb
+*.manifest
+
+# Ignore iOS build artifacts
+*.ipa
+build/
+DerivedData/
+
+# Ignore macOS specific build artifacts
+*.dSYM.zip
+*.dSYM
+
+# Ignore Windows specific build artifacts
+*.appx
+*.appxbundle
+*.appxupload
+*.appxsym
+
+# Ignore Rider specific files
+.idea/
+
+# Ignore JetBrains specific files
+.idea/
+*.sln.iml
+
+# Ignore jetbrains IDE sessions
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries
+.idea/vcs.xml
+.idea/jsLibraryMappings.xml
+
+# Ignore user-specific files and directories
+*.swp
+*~
+.ida_backup
+*.ida*

@@ -1,0 +1,30 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ChessAnalyzer.MainPage">
+    <ContentPage.Content>
+        <StackLayout Padding="30">
+            <Label Text="Insert your Chess.com id:"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="CenterAndExpand" />
+
+            <Entry x:Name="PseudoEntry"
+                   Placeholder="Pseudo"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="CenterAndExpand" />
+
+            <Label Text="Insert your Game id (let it empty if you want to display all lastest game)"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="CenterAndExpand" />
+
+            <Entry x:Name="GameId"
+                   Placeholder="GameId"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="CenterAndExpand" />
+
+            <Button Text="Soumettre"
+                    Clicked="OnSubmitClicked"
+                    VerticalOptions="CenterAndExpand"
+                    HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
