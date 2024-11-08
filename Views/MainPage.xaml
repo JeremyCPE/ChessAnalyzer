@@ -1,6 +1,8 @@
 ﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ChessAnalyzer.MainPage">
+             xmlns:viewModels="clr-namespace:ChessAnalyzer.ViewModel"
+             x:Class="ChessAnalyzer.Views.MainPage">
+    
     <ContentPage.Content>
         <StackLayout Padding="30">
             <Label Text="Insert your Chess.com id:"
@@ -10,7 +12,8 @@
             <Entry x:Name="PseudoEntry"
                    Placeholder="Pseudo"
                    VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand" />
+                   HorizontalOptions="CenterAndExpand"
+                   Text ="{Binding Username}"/>
 
             <Label Text="Insert your Game id (let it empty if you want to display all lastest game)"
                    VerticalOptions="CenterAndExpand"
@@ -22,9 +25,19 @@
                    HorizontalOptions="CenterAndExpand" />
 
             <Button Text="Soumettre"
-                    Clicked="OnSubmitClicked"
+                    Command="{Binding GetGamesCommand}"
+                    BackgroundColor="LightBlue"
                     VerticalOptions="CenterAndExpand"
                     HorizontalOptions="CenterAndExpand" />
+            <ActivityIndicator IsRunning="{Binding IsLoading}" />
+
+            <ListView ItemsSource="{Binding Games}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Opponent}" Detail="{Binding Result}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
