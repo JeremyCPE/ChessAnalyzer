@@ -61,9 +61,9 @@ namespace ChessAnalyzer.ViewModel
                     Games.Add(game);
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Erreur", "Impossible de récupérer les parties.", "OK");
+                await Application.Current.MainPage.DisplayAlert("Erreur", $"Impossible de récupérer les parties. {ex}", "OK");
             }
             finally
             {

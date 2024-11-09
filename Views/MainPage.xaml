@@ -2,7 +2,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:ChessAnalyzer.ViewModel"
              x:Class="ChessAnalyzer.Views.MainPage">
-    
     <ContentPage.Content>
         <StackLayout Padding="30">
             <Label Text="Insert your Chess.com id:"
@@ -13,7 +12,8 @@
                    Placeholder="Pseudo"
                    VerticalOptions="CenterAndExpand"
                    HorizontalOptions="CenterAndExpand"
-                   Text ="{Binding Username}"/>
+                   Text ="{Binding Username}"
+                   TextChanged="PseudoEntry_OnTextChanged"/>
 
             <Label Text="Insert your Game id (let it empty if you want to display all lastest game)"
                    VerticalOptions="CenterAndExpand"
@@ -24,7 +24,8 @@
                    VerticalOptions="CenterAndExpand"
                    HorizontalOptions="CenterAndExpand" />
 
-            <Button Text="Soumettre"
+            <Button Text="Go"
+                    x:Name="SubmitButton"
                     Command="{Binding GetGamesCommand}"
                     BackgroundColor="LightBlue"
                     VerticalOptions="CenterAndExpand"
