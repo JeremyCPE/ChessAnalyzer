@@ -15,15 +15,6 @@
                    Text ="{Binding Username}"
                    TextChanged="PseudoEntry_OnTextChanged"/>
 
-            <Label Text="Insert your Game id (let it empty if you want to display all lastest game)"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand" />
-
-            <Entry x:Name="GameId"
-                   Placeholder="GameId"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand" />
-
             <Button Text="Go"
                     x:Name="SubmitButton"
                     Command="{Binding GetGamesCommand}"

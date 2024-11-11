@@ -13,7 +13,7 @@ namespace ChessAnalyzer.ViewModel
         private string _username;
         private bool _isLoading;
         
-        public ObservableCollection<Game> Games { get; } = new ObservableCollection<Game>();
+        public ObservableCollection<Game> Games { get; } = new ();
         public ICommand GetGamesCommand { get; }
 
         public string Username
@@ -60,6 +60,11 @@ namespace ChessAnalyzer.ViewModel
                 {
                     Games.Add(game);
                 }
+            }
+            catch (HttpRequestException ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Erreur", $"The request to chess.com has failed, please try again later {ex.StatusCode}", "OK");
+                
             }
             catch (Exception ex)
             {

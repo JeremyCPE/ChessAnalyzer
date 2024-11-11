@@ -2,5 +2,5 @@
 
 public class GamesResponse
 {
-    public GameData[] Games { get; set; }
+    public GameResponse[] Games { get; set; }
 }

@@ -4,13 +4,13 @@ namespace ChessAnalyzer.Controller;
 
 public class ChessComController
 {
-   public Game SearchByGameId(string gameId)
+   public GameResponse SearchByGameId(string gameId)
    {
-      return new Game();
+      return new GameResponse();
    }
    
-   public List<Game> SearchByPseudo(string pseudo)
+   public List<GameResponse> SearchByPseudo(string pseudo)
    {
-      return new List<Game>();
+      return new List<GameResponse>();
    }
 }
