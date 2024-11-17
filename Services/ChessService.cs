@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+﻿using Newtonsoft.Json;
 using ChessAnalyzer.Models;
 
 namespace ChessAnalyzer.Services;
@@ -7,29 +7,35 @@ public class ChessService(HttpClient httpClient) : IChessService
 {
     public async Task<List<Game>> GetGamesAsync(string username)
     {
-        var games = new List<Game>();
-
-        
         string url = $"https://api.chess.com/pub/player/{username}/games/{DateTime.Today.Year}/{DateTime.Today.Month}";
         
         var response = await httpClient.GetStringAsync(url);
-        var archives = JsonSerializer.Deserialize<ArchiveResponse>(response);
+        return GetGameFromJsonData(username, response);
+    }
 
-        if (archives?.Archives?.Length > 0)
+    
+    public async Task<List<Game>> GetGamesAsyncTest(string username)
+    {
+        var json = await File.ReadAllTextAsync(
+            "C:\\Users\\mohar\\source\\repos\\ChessAnalyzer\\ChessAnalyzer\\JsonTests\\games.json");
+        return GetGameFromJsonData("RedSeeds", json);
+    }
+    private static List<Game> GetGameFromJsonData(string username, string response)
+    {
+        var games = new List<Game>();
+        var gamesResponse = JsonConvert.DeserializeObject<GamesResponse>(response);
+
+        if(gamesResponse?.Games == null) return games;
+        
+        foreach (var gameData in gamesResponse.Games)
         {
-            string latestArchiveUrl = archives.Archives[^1];
-            var gamesResponse = await httpClient.GetStringAsync(latestArchiveUrl);
-            var gamesData = JsonSerializer.Deserialize<GamesResponse>(gamesResponse);
+            var opponent = gameData.White.Username == username ? gameData.Black.Username : gameData.White.Username;
+            var result = gameData.White.Username == username ? gameData.White.Result : gameData.Black.Result;
 
-            foreach (var gameData in gamesData?.Games ?? Array.Empty<GameResponse>())
-            {
-                var opponent = gameData.White.Username == username ? gameData.Black.Username : gameData.White.Username;
-                var result = gameData.White.Username == username ? gameData.White.Result : gameData.Black.Result;
-                
-                games.Add(new Game() { Opponent = opponent, Result = result });
-            }
+            games.Add(new Game() { Player = username, Opponent = opponent, Result = result });
         }
 
         return games;
     }
+
 }

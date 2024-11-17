@@ -14,15 +14,22 @@
                    HorizontalOptions="CenterAndExpand"
                    Text ="{Binding Username}"
                    TextChanged="PseudoEntry_OnTextChanged"/>
-
+            
             <Button Text="Go"
                     x:Name="SubmitButton"
                     Command="{Binding GetGamesCommand}"
                     BackgroundColor="LightBlue"
                     VerticalOptions="CenterAndExpand"
                     HorizontalOptions="CenterAndExpand" />
+            
+            <Button Text="TestButton"
+                    x:Name="SubmitButtonTest"
+                    Command="{Binding LaunchTest}"
+                    BackgroundColor="Red"
+                    VerticalOptions="CenterAndExpand"
+                    HorizontalOptions="CenterAndExpand" />
             <ActivityIndicator IsRunning="{Binding IsLoading}" />
-
+            <StackLayout>
             <ListView ItemsSource="{Binding Games}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -30,6 +37,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+        </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

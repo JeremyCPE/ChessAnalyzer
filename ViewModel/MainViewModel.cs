@@ -15,6 +15,7 @@ namespace ChessAnalyzer.ViewModel
         
         public ObservableCollection<Game> Games { get; } = new ();
         public ICommand GetGamesCommand { get; }
+        public ICommand LaunchTest { get; }
 
         public string Username
         {
@@ -40,6 +41,26 @@ namespace ChessAnalyzer.ViewModel
         {
             _chessService = chessService;
             GetGamesCommand = new Command(async () => await FetchGamesAsync());
+            LaunchTest = new Command(async () => await FetchGamesAsyncTest());
+        }
+
+        private async Task<object> FetchGamesAsyncTest()
+        {
+            try
+            {
+                var games = await _chessService.GetGamesAsyncTest(Username);
+                foreach (var game in games)
+                {
+                    Games.Add(game);
+                }
+                return Task.FromResult<object>(games);
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         private async Task FetchGamesAsync()

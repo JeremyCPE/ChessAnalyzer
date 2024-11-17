@@ -1,4 +1,6 @@
-﻿namespace ChessAnalyzer.Models;
+﻿using Newtonsoft.Json;
+
+namespace ChessAnalyzer.Models;
 
 public class GameResponse
 {
@@ -7,7 +9,13 @@ public class GameResponse
     
     public string PGN {get;set;}
     public string FEN {get;set;}
-     
-    public TimeSpan StartTime {get;set;}
-    public TimeSpan EndTime { get; set; }
+
+    [JsonProperty("start_time")]
+    public int StartTime {get;set;}
+    [JsonProperty("end_time")]
+    public int EndTime { get; set; }
+    [JsonProperty("time_class")]
+    public string TimeClass{get;set;}
+    [JsonProperty("time_control")]
+    public string TimeControl{get;set;}
 }
