@@ -30,13 +30,33 @@
                     HorizontalOptions="CenterAndExpand" />
             <ActivityIndicator IsRunning="{Binding IsLoading}" />
             <StackLayout>
-            <ListView ItemsSource="{Binding Games}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextCell Text="{Binding Opponent}" Detail="{Binding Result}" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                <ListView ItemsSource="{Binding Games}" SeparatorVisibility="None">
+                    <ListView.Header>
+                        <Grid Padding="10" BackgroundColor="LightGray">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Opponent" FontAttributes="Bold" />
+                            <Label Text="Result" FontAttributes="Bold" Grid.Column="1" HorizontalTextAlignment="Center" />
+                        </Grid>
+                    </ListView.Header>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid Padding="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding Opponent}" />
+                                    <Label Text="{Binding Result}" Grid.Column="1" HorizontalTextAlignment="Center" />
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
         </StackLayout>
         </StackLayout>
     </ContentPage.Content>
