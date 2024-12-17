@@ -9,6 +9,8 @@ public class GameResponse
     
     public string PGN {get;set;}
     public string FEN {get;set;}
+    
+    public string UUID {get;set;}
 
     [JsonProperty("start_time")]
     public int StartTime {get;set;}

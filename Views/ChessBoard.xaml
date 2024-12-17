@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:ChessAnalyzer.ViewModel"
+             x:Class="ChessAnalyzer.Views.ChessBoard"
+             Title="Chessboard">
+
+    <ContentPage.BindingContext>
+        <viewModels:ChessboardViewModel />
+    </ContentPage.BindingContext>
+    <StackLayout >
+        <!-- Navigation Buttons -->
+
+        <Grid ColumnSpacing="10" Padding="10" HorizontalOptions="Center" ColumnDefinitions="*, 2*, *">
+            <Button Grid.Column="0" Text="◀" Command="{Binding PreviousMoveCommand}" FontSize="20" />
+            <Label Grid.Column="1" Text="{Binding CurrentMoveLabel}" FontSize="18" HorizontalTextAlignment="Center" />
+            <Button Grid.Column="2" Text="▶" Command="{Binding NextMoveCommand}" FontSize="20" />
+        </Grid>
+        <ListView ItemsSource="{Binding Squares}" SeparatorVisibility="Default">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                    <!-- Chessboard -->
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <!-- Chessboard Squares -->
+                            <BoxView Color="{Binding Color}" Grid.Row="{Binding Row}" Grid.Column="{Binding Column}" />
+                            <!-- Pieces -->
+                            <Image Source="{Binding PieceImage}" Grid.Row="{Binding Row}" Grid.Column="{Binding Column}" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

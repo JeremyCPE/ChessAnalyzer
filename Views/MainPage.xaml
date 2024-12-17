@@ -48,9 +48,14 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
                                     <Label Text="{Binding Opponent}" />
                                     <Label Text="{Binding Result}" Grid.Column="1" HorizontalTextAlignment="Center" />
+                                    <Button Grid.Column="2" 
+                                            Text="Analyse" 
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.AnalyseGameCommand}" 
+                                            CommandParameter="{Binding }" />
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>

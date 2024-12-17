@@ -23,10 +23,13 @@ public static class MauiProgram
         builder.Services.AddSingleton<IChessService, ChessService>();
 
         // Enregistrer le ViewModel
-        builder.Services.AddTransient<MainViewModel>();
+        builder.Services.AddSingleton<ChessboardViewModel>();
+        builder.Services.AddSingleton<MainViewModel>();
 
         // Enregistrer la page principale
         builder.Services.AddTransient<MainPage>();
+        builder.Services.AddTransient<ChessBoard>();
+
 
 #if DEBUG
         builder.Logging.AddDebug();
