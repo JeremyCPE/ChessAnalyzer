@@ -2,8 +2,10 @@
 
 public class ChessSquare
 {
-    public int Row { get; set; }
-    public int Column { get; set; }
+    public string Row { get; set; }
+    public string Column { get; set; }
     public Color Color { get; set; }
     public string PieceImage { get; set; }
+
+    public string Position => $"{Row}/{Column}";
 }

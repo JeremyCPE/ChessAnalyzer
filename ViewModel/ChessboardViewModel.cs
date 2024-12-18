@@ -1,8 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using ChessAnalyzer.Models;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
-using ChessAnalyzer.Models;
 
 namespace ChessAnalyzer.ViewModel;
 public class ChessboardViewModel : BindableObject
@@ -18,7 +18,7 @@ public class ChessboardViewModel : BindableObject
     public ICommand PreviousMoveCommand { get; }
 
     public Game SelectedGame { get; private set; }
-    
+
     public ChessboardViewModel()
     {
         NextMoveCommand = new Command(ExecuteNextMove);
@@ -43,7 +43,7 @@ public class ChessboardViewModel : BindableObject
 2. d4 {[%clk 0:09:55.6]} 2... Bg7 {[%clk 0:09:56.3]} 
 3. Nf3 {[%clk 0:09:54.9]} 3... e6 {[%clk 0:09:55.7]} 4. h4 {[%clk 0:09:48.8]}";
 
-    
+
     public void SetGame(Game game)
     {
         SelectedGame = game;
@@ -74,7 +74,7 @@ public class ChessboardViewModel : BindableObject
     private void ParsePGN(string pgn)
     {
         // Regex to extract only the moves (e.g., e4, g6)
-        var moveRegex = new Regex(@"\b[a-h][1-8](?:=[QRBN])?|[a-hRNBQK][a-h1-8x]*[a-h1-8](?:=[QRBN])?\+?#?");
+        Regex moveRegex = new(@"\b[a-h][1-8](?:=[QRBN])?|[a-hRNBQK][a-h1-8x]*[a-h1-8](?:=[QRBN])?\+?#?");
 
         _pgnMoves = moveRegex.Matches(pgn)
                              .Select(m => m.Value)
@@ -113,8 +113,8 @@ public class ChessboardViewModel : BindableObject
         // Simplified for now: this function applies basic pawn and knight moves
         // Full PGN support would require a chess library or more robust logic
 
-        var targetFile = move[^2] - 'a'; // e.g., e4 -> 'e' -> column index
-        var targetRank = 8 - int.Parse(move[^1].ToString()); // rank -> row index
+        int targetFile = move[^2] - 'a'; // e.g., e4 -> 'e' -> column index
+        int targetRank = 8 - int.Parse(move[^1].ToString()); // rank -> row index
 
         // For simplicity: Move the first matching piece
         for (int row = 0; row < 8; row++)
@@ -139,12 +139,12 @@ public class ChessboardViewModel : BindableObject
             for (int col = 0; col < 8; col++)
             {
                 bool isDarkSquare = (row + col) % 2 == 1;
-                string imageSource = !string.IsNullOrEmpty(_board[row, col]) ? $"{_board[row, col]}.png" : null;
+                string imageSource = !string.IsNullOrEmpty(_board[row, col]) ? $"{_board[row, col]}.png" : "";
 
                 Squares.Add(new ChessSquare
                 {
-                    Row = row,
-                    Column = col,
+                    Row = row.ToString(),
+                    Column = col.ToString(),
                     Color = isDarkSquare ? Colors.Brown : Colors.Beige,
                     PieceImage = imageSource
                 });

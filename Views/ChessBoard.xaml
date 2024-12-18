@@ -8,49 +8,61 @@
     <ContentPage.BindingContext>
         <viewModels:ChessboardViewModel />
     </ContentPage.BindingContext>
-    <StackLayout >
+    <ContentPage.Content>
         <!-- Navigation Buttons -->
 
-        <Grid ColumnSpacing="10" Padding="10" HorizontalOptions="Center" ColumnDefinitions="*, 2*, *">
-            <Button Grid.Column="0" Text="◀" Command="{Binding PreviousMoveCommand}" FontSize="20" />
-            <Label Grid.Column="1" Text="{Binding CurrentMoveLabel}" FontSize="18" HorizontalTextAlignment="Center" />
-            <Button Grid.Column="2" Text="▶" Command="{Binding NextMoveCommand}" FontSize="20" />
-        </Grid>
-        <ListView ItemsSource="{Binding Squares}" SeparatorVisibility="Default">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                    <!-- Chessboard -->
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
+            <StackLayout>
+            <Grid HorizontalOptions="Center" VerticalOptions="Center">
+                <Image Source="chess_board.png"
+           Aspect="AspectFit"
+           HeightRequest="504" WidthRequest="504" />
 
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <!-- Chessboard Squares -->
-                            <BoxView Color="{Binding Color}" Grid.Row="{Binding Row}" Grid.Column="{Binding Column}" />
-                            <!-- Pieces -->
-                            <Image Source="{Binding PieceImage}" Grid.Row="{Binding Row}" Grid.Column="{Binding Column}" />
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </StackLayout>
+                <!-- Fixed Grid positioning -->
+                <Grid RowSpacing="0" ColumnSpacing="0" 
+                      MaximumHeightRequest="504" MaximumWidthRequest="504">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <CollectionView ItemsSource="{Binding Squares}"
+                                   SelectionMode="None"
+                                   ItemsLayout="VerticalGrid,8">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding PieceImage}"
+                                           Aspect="AspectFit" HorizontalOptions="Center" 
+                                           VerticalOptions="Center" 
+                                       Grid.Row="{Binding Row}" Grid.Column="{Binding Column}"/>
+
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+            </Grid>
+            <Grid ColumnSpacing="10" Padding="10" HorizontalOptions="Center" ColumnDefinitions="*, 10*, *">
+                <Button Grid.Column="0" Text="◀" Command="{Binding PreviousMoveCommand}" FontSize="20" />
+                <Label Grid.Column="1" Text="{Binding CurrentMoveLabel}" FontSize="18" HorizontalTextAlignment="Center" />
+                <Button Grid.Column="2" Text="▶" Command="{Binding NextMoveCommand}" FontSize="20" />
+            </Grid>
+        </StackLayout>
+            
+        </ContentPage.Content>
 </ContentPage>
