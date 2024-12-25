@@ -47,12 +47,12 @@
                                    ItemsLayout="VerticalGrid,8">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Frame WidthRequest="63" HeightRequest="63" Grid.Row="{Binding Row}" Grid.Column="{Binding Column}" BackgroundColor="Transparent">
+                                <Border WidthRequest="63" HeightRequest="63" Grid.Row="{Binding Row}" Grid.Column="{Binding Column}" BackgroundColor="Transparent">
                                 <Image Source="{Binding PieceImage}"
                                            Aspect="AspectFit" HorizontalOptions="Center" 
                                            VerticalOptions="Center" 
                                        />
-                                </Frame>
+                                </Border>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
