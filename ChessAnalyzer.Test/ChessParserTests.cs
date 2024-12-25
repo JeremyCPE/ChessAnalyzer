@@ -1,5 +1,6 @@
 using ChessAnalyser.Service;
 
+namespace ChessAnalyser.Test;
 public class ChessParserTests
 {
     [Fact]
