@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace ChessAnalyser.Service
 {
@@ -7,34 +6,55 @@ namespace ChessAnalyser.Service
     {
         public static ChessGame ParsePgn(string pgnData)
         {
-            ChessGame game = new();
+            List<ChessMove> moves = new();
 
-            // Extract the CurrentPosition
-            Match currentPositionMatch = Regex.Match(pgnData, @"\[CurrentPosition\s+""([^""]+)""\]");
-            if (currentPositionMatch.Success)
+            string pattern = @"(\d+)\.\s(\w+)\s\{%\[clk\s([\d:.]+)\]\}|(\.\.\.\s(\w+)\s\{%\[clk\s([\d:.]+)\]\})";
+
+            // Regex for White's move
+            string whiteMovePattern = @"(\d+)\.\s(\w+)\s\{%\[clk\s([\d:.]+)\]\}";
+            // Regex for Black's move
+            string blackMovePattern = @"\.\.\.\s(\w+)\s\{%\[clk\s([\d:.]+)\]\}";
+
+            MatchCollection whiteMatches = Regex.Matches(pgnData, whiteMovePattern);
+            MatchCollection blackMatches = Regex.Matches(pgnData, blackMovePattern);
+
+
+
+            MatchCollection matches = Regex.Matches(pgnData, pattern);
+
+            foreach (Match match in matches)
             {
-                game.CurrentPosition = currentPositionMatch.Groups[1].Value;
-            }
+                int moveNumber = int.Parse(match.Groups[1].Value);
 
-            // Extract moves and clock times
-            string movesSection = Regex.Match(pgnData, @"1\..+").Value; // Find the moves section starting from "1."
-            MatchCollection moveMatches = Regex.Matches(movesSection, @"(?<move>[a-h1-8=+#]{2,}|\.\.\.)\s*\{%\[clk\s+(?<time>[0-9:.]+)\]\}");
-
-            foreach (Match match in moveMatches)
-            {
-                if (match.Success)
+                // White move
+                moves.Add(new ChessMove
                 {
-                    Move move = new()
+                    MoveNumber = moveNumber,
+                    Player = "White",
+                    Move = match.Groups[2].Value,
+                    Clock = match.Groups[3].Value
+                });
+
+                // Black move (if exists)
+                if (match.Groups[5].Success)
+                {
+                    moves.Add(new ChessMove
                     {
-                        Notation = match.Groups["move"].Value,
-                        Clock = TimeSpan.ParseExact(match.Groups["time"].Value, "m\\:ss\\.f", CultureInfo.InvariantCulture)
-                    };
-                    game.Moves.Add(move);
+                        MoveNumber = moveNumber,
+                        Player = "Black",
+                        Move = match.Groups[5].Value,
+                        Clock = match.Groups[6].Value
+                    });
                 }
             }
-
+            ChessGame game = new()
+            {
+                Moves = moves
+            };
             return game;
-        }
-    }
 
+        }
+
+    }
 }
+

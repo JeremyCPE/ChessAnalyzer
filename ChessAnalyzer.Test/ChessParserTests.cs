@@ -58,15 +58,15 @@ public class ChessParserTests
 
         // Validate the first move
         Assert.Equal("e4", game.Moves[0].Notation);
-        Assert.Equal(TimeSpan.FromMinutes(10), game.Moves[0].Clock);
+        Assert.Equal("10", game.Moves[0].Clock);
 
         // Validate the second move
         Assert.Equal("g6", game.Moves[1].Notation);
-        Assert.Equal(new TimeSpan(0, 0, 9, 57, 400), game.Moves[1].Clock);
+        Assert.Equal("9:57:400", game.Moves[1].Clock);
 
         // Validate the last move
         Assert.Equal("h4", game.Moves.Last().Notation);
-        Assert.Equal(new TimeSpan(0, 0, 9, 48, 800), game.Moves.Last().Clock);
+        Assert.Equal("9:48:800", game.Moves.Last().Clock);
     }
 
     [Fact]
@@ -111,6 +111,6 @@ public class ChessParserTests
         Assert.Equal(8, game.Moves.Count);
 
         // Validate moves without clock times
-        Assert.All(game.Moves, move => Assert.Equal(TimeSpan.Zero, move.Clock));
+        Assert.All(game.Moves, move => Assert.Equal("", move.Clock));
     }
 }

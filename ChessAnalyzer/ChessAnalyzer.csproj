@@ -79,11 +79,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Models\" />
-      <Folder Include="Services\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\ChessAnalyser.Model\ChessAnalyser.Model.csproj" />
       <ProjectReference Include="..\ChessAnalyserService\ChessAnalyser.Service.csproj" />
     </ItemGroup>

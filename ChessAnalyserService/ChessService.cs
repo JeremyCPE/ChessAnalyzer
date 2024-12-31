@@ -32,7 +32,7 @@ public class ChessService(HttpClient httpClient) : IChessService
             string opponent = gameData.White.Username == username ? gameData.Black.Username : gameData.White.Username;
             string result = gameData.White.Username == username ? gameData.White.Result : gameData.Black.Result;
 
-            games.Add(new Game() { Player = username, Opponent = opponent, Result = result, PGN = gameData.PGN, UUID = gameData.UUID });
+            games.Add(gameData.ToGame(username, opponent, result));
         }
 
         return games;

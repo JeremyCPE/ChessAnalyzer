@@ -1,11 +1,15 @@
 ﻿public class ChessGame
 {
     public string CurrentPosition { get; set; }
-    public List<Move> Moves { get; set; } = new List<Move>();
+    public List<ChessMove> Moves { get; set; } = new List<ChessMove>();
 }
 
-public class Move
+public class ChessMove
 {
+    public int MoveNumber { get; set; }
+    public string Player { get; set; }
     public string Notation { get; set; }
-    public TimeSpan Clock { get; set; }
+    public string Move { get; set; }
+
+    public string Clock { get; set; }
 }
