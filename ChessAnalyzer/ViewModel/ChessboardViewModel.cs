@@ -41,7 +41,7 @@ public class ChessboardViewModel : BindableObject
 
 1. e4 {[%clk 0:10:00]} 1... g6 {[%clk 0:09:57.4]} 
 2. d4 {[%clk 0:09:55.6]} 2... Bg7 {[%clk 0:09:56.3]} 
-3. Nf3 {[%clk 0:09:54.9]} 3... e6 {[%clk 0:09:55.7]} 4. h4 {[%clk 0:09:48.8]}";
+3. Nf3 {[%clk 0:09:54.9]} 3... e6 {[%clk 0:09:55.7]} 4. h4 {[%clk 0:09:48.8]} ";
 
 
     public void SetGame(Game game)
