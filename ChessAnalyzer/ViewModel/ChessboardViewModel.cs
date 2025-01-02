@@ -110,13 +110,10 @@ public class ChessboardViewModel : BindableObject
 
     private void ApplyMove(string move)
     {
-        // Simplified for now: this function applies basic pawn and knight moves
-        // Full PGN support would require a chess library or more robust logic
+        //TODO : Use ChessModel to apply the move
+        int targetFile = move[^2] - 'a';
+        int targetRank = 8 - int.Parse(move[^1].ToString());
 
-        int targetFile = move[^2] - 'a'; // e.g., e4 -> 'e' -> column index
-        int targetRank = 8 - int.Parse(move[^1].ToString()); // rank -> row index
-
-        // For simplicity: Move the first matching piece
         for (int row = 0; row < 8; row++)
         {
             for (int col = 0; col < 8; col++)
